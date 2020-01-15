@@ -1,0 +1,33 @@
+.Input {
+  display: inline-block;
+  font-family: SF Pro Text;
+}
+
+.Input-field {
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.Input-field:focus {
+  border: 2px solid #45a5ff;
+  border-radius: 5px;
+}
+
+.Input-field::placeholder {
+  font-size: 18px;
+  color: #000000;
+  opacity: 0.4;
+}
+
+.Input-label {
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
