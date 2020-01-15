@@ -1,0 +1,35 @@
+.TextArea {
+  display: inline-block;
+  font-family: SF Pro Text;
+}
+
+.TextArea-label {
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.TextArea-field {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 10px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.TextArea-field:focus {
+  border: 2px solid #45a5ff;
+  border-radius: 5px;
+}
+
+.TextArea-field::placeholder {
+  font-size: 18px;
+  line-height: 25px;
+  color: #000000;
+  opacity: 0.4;
+}
