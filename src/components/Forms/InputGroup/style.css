@@ -1,0 +1,20 @@
+.InputGroup form:first-child > input {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.InputGroup form:not(:first-child) > input {
+  margin-left: -1px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.InputGroup form:not(:last-child) > input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.InputGroup form:last-child > input {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
