@@ -1,0 +1,65 @@
+.MailSender {
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 800px;
+  padding: 30px;
+}
+
+.MailSender-title {
+  font-family: SF Pro Text;
+  font-size: 30px;
+  line-height: 40px;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+.MailSender-inputGroup {
+  margin-top: 20px;
+}
+
+.MailSender-topicInput {
+  margin-top: 20px;
+  width: 740px;
+}
+
+.MailSender-inputGroupInput {
+  width: 370px;
+}
+
+.MailSender-messageTextAreaForm {
+  margin-top: 20px;
+  width: 740px;
+}
+
+.MailSender-messageTextAreaField {
+  height: 140px;
+  resize: none;
+}
+
+.MailSender-fileAttach {
+  margin-top: 10px;
+  font-family: SF Pro Text;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height, or 125% */
+
+  display: flex;
+  align-items: center;
+  height: 30px;
+
+  color: #0055fb;
+  background: transparent;
+}
+
+.MailSender-sendButton {
+  width: 140px;
+  height: 40px;
+
+  margin-top: 20px;
+}
