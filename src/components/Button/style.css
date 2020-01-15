@@ -1,0 +1,54 @@
+.Button {
+  border-radius: 5px;
+  border: none;
+  font-family: SF Pro Text;
+
+  font-size: 18px;
+  line-height: 30px;
+  /* identical to box height, or 167% */
+
+  outline: none;
+}
+
+.Button--normal {
+  background: linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
+  color: #ffffff;
+}
+
+.Button--normal:focus {
+  border: 2px solid #47a6ff80;
+  border-radius: 7px;
+}
+
+.Button--normal:hover {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.15)
+    ),
+    linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
+}
+
+.Button--normal:active {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;
+}
+
+.Button--normal:disabled {
+  background: linear-gradient(0deg, #c4c4c4, #c4c4c4),
+    linear-gradient(180deg, #45a6ff 0%, #0055fb 100%);
+}
+
+.Button--textOnly {
+  background: transparent;
+  color: rgb(18,91,242)
+}
+
+.Button--textOnly:focus {
+  border: 2px solid #47a6ff80;
+  border-radius: 7px;
+}
+
+.Button--textOnly:hover {
+  color: rgb(47, 104, 222);
+}
