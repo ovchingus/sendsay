@@ -1,0 +1,24 @@
+.Table {
+  padding: 1rem;
+}
+
+table {
+  border-spacing: 0;
+  border: 0px solid black;
+}
+table > tr > th {
+  border-bottom: 1px solid black;
+}
+
+th,
+td {
+  /* width: 100%; */
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom: 0px solid black;
+  border-right: 0px solid black;
+}
+
+th:last-child, td:last-child {
+  border-right: 0;
+}
