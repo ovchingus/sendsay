@@ -1,19 +1,30 @@
 import React from 'react'
-import { useTable } from 'react-table'
+import { useTable, useBlockLayout } from 'react-table'
 
 import './style.css'
 
 const Table = ({ columns, data, className }) => {
+  const defaultColumn = React.useMemo(
+    () => ({
+      width: 80
+    }),
+    []
+  )
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow
-  } = useTable({
-    columns,
-    data
-  })
+  } = useTable(
+    {
+      columns,
+      data,
+      defaultColumn
+    },
+    useBlockLayout
+  )
 
   return (
     <table className={`Table ${className}`} {...getTableProps()}>

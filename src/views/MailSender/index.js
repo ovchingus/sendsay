@@ -8,9 +8,9 @@ import Button from 'components/Button'
 
 import './style.css'
 
-const MailSender = () => {
+const MailSender = ({ className }) => {
   return (
-    <div className='MailSender'>
+    <div className={`MailSender ${className}`}>
       <div className='MailSender-title'>
         Отправлялка сообщений
       </div>

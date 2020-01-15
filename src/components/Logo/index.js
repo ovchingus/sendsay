@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Logo = ({ src }) => {
+const Logo = ({ src, className }) => {
   return (
-    <img src={src} alt='Logo' />
+    <img src={src} className={className} alt='Logo' />
   )
 }
 
