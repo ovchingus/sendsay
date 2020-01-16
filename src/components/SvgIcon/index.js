@@ -1,8 +1,8 @@
 import React from 'react'
 
-const SvgIcon = ({ src, alt }) => {
+const SvgIcon = ({ src, alt, className }) => {
   return (
-    <img src={src} alt={alt} />
+    <img src={src} className={className} alt={alt} />
   )
 }
 
