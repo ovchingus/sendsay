@@ -7,11 +7,11 @@ import IconTrash from 'assets/IconTrash.svg'
 
 import './style.css'
 
-const Attachment = ({ className }) => {
+const Attachment = ({ className, name }) => {
   return (
     <div className={`Attachment ${className}`}>
       <SvgIcon className='Attachment-icon' src={IconPaperclipMD} alt='paperclip-icon' />
-      <span className='Attachment-filename'>Afqanwdianwdianwdaowdaowndnwk.jpg</span>
+      <span className='Attachment-filename'>{name}</span>
       <Button textOnly className='Attachment-removeButton'>
         <SvgIcon src={IconTrash} alt='trash-icon' />
         &nbsp;Удалить

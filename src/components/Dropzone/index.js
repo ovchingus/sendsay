@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import './style.css'
@@ -32,7 +32,7 @@ const rejectStyle = {
   borderColor: '#ff1744'
 }
 
-function Dropzone ({ className }) {
+function Dropzone ({ className, handleFiles, maxFileSize, maxFilesSize }) {
   const {
     acceptedFiles,
     rejectedFiles,
@@ -43,7 +43,7 @@ function Dropzone ({ className }) {
     isDragReject
   } = useDropzone({
     accept: 'image/jpg, image/png, image/gif, .doc, .docx, .xls, .xlsx, .pdf, .zip',
-    maxSize: 5000000,
+    maxSize: maxFileSize,
     multiple: true,
     noClick: true
   })
@@ -55,17 +55,9 @@ function Dropzone ({ className }) {
     ...(isDragReject ? rejectStyle : {})
   }), [isDragAccept, isDragActive, isDragReject])
 
-  const acceptedFilesItems = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ))
-
-  const rejectedFilesItems = rejectedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ))
+  if (handleFiles) {
+    handleFiles(acceptedFiles)
+  }
 
   return (
     <div className={`Dropzone ${className}`}>
@@ -74,16 +66,6 @@ function Dropzone ({ className }) {
         <div className='Dropzone-title'>Бросайте файлы сюда, я ловлю</div>
         <div className='Dropzone-text'>Мы принимаем картинки (jpg, png, gif), офисные файлы (doc, xls, pdf) и zip-архивы. Размеры файла до 5 МБ</div>
       </div>
-      {/* <aside>
-        <h4>Accepted files</h4>
-        <ul>
-          {acceptedFilesItems}
-        </ul>
-        <h4>Rejected files</h4>
-        <ul>
-          {rejectedFilesItems}
-        </ul>
-      </aside> */}
     </div>
   )
 }

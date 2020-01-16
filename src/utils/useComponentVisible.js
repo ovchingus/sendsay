@@ -17,7 +17,7 @@ function useComponentVisible (initialIsVisible) {
     }
   })
 
-  return { ref, isComponentVisible, setIsComponentVisible }
+  return [ref, isComponentVisible, setIsComponentVisible]
 }
 
 export default useComponentVisible
