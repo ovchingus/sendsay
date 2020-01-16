@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "SF Pro Text";
+  src: local("SF Pro Text"),
+    url(./assets/fonts/SF_Pro_Text.ttf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
