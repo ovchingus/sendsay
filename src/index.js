@@ -4,4 +4,6 @@ import App from 'pages/App'
 
 import 'normalize.css'
 
+import './index.css'
+
 ReactDOM.render(<App />, document.getElementById('root'))
