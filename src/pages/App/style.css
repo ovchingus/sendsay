@@ -1,27 +1,26 @@
 .App-MailSender {
-    margin-top: 20px;
-  }
-  
-  .App-logo {
-    margin-top: 40px;
-  }
-  
-  .App-SendedTable {
-    margin: 50px auto;
-    width: 740px;
-  
-    font-family: SF Pro Text;
-  }
-  
-  .App-SendedTableTitle {
-    font-size: 24px;
-    line-height: 30px;
-  
-    color: #000000;
-  }
-  
-  .App-SendedTableData {
-    margin-top: 10px;
-    width: 740px;
-  }
-  
+  margin-top: 20px;
+}
+
+.App-logo {
+  margin-top: 40px;
+}
+
+.App-SendedTable {
+  margin: 50px auto;
+  width: 740px;
+
+  font-family: SF Pro Text;
+}
+
+.App-SendedTableTitle {
+  font-size: 24px;
+  line-height: 30px;
+
+  color: #000000;
+}
+
+.App-SendedTableData {
+  margin-top: 10px;
+  width: 740px;
+}

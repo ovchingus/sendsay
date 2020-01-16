@@ -41,7 +41,7 @@
 
 .Button--textOnly {
   background: transparent;
-  color: rgb(18,91,242)
+  color: rgb(18, 91, 242);
 }
 
 .Button--textOnly:focus {
