@@ -8,7 +8,7 @@ import Button from 'components/Button'
 
 import './style.css'
 
-import Attachment from '../Attachment'
+import Attachment from './Attachment'
 
 const MailSender = ({ className }) => {
   return (

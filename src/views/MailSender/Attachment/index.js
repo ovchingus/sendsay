@@ -11,10 +11,10 @@ const Attachment = ({ className }) => {
   return (
     <div className={`Attachment ${className}`}>
       <SvgIcon className='Attachment-icon' src={IconPaperclipMD} alt='paperclip-icon' />
-      <span className='Attachment-filename'>Afqk.jpg</span>
+      <span className='Attachment-filename'>Afqanwdianwdianwdaowdaowndnwk.jpg</span>
       <Button textOnly className='Attachment-removeButton'>
-        <SvgIcon src={IconTrash} className='Attachment-removeButtonIcon' />
-        Удалить
+        <SvgIcon src={IconTrash} alt='trash-icon' />
+        &nbsp;Удалить
       </Button>
     </div>
   )
