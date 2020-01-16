@@ -22,8 +22,7 @@
 
 .Input-field::placeholder {
   font-size: 18px;
-  color: #000000;
-  opacity: 0.4;
+  color: #949494;
 }
 
 .Input-label {
