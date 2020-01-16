@@ -3,7 +3,17 @@ import { useTable, useBlockLayout } from 'react-table'
 
 import './style.css'
 
-const Table = ({ columns, data, className }) => {
+const defaultPropGetter = () => ({})
+
+const Table = ({
+  columns,
+  data,
+  className,
+  getHeaderProps = defaultPropGetter,
+  getColumnProps = defaultPropGetter,
+  getRowProps = defaultPropGetter,
+  getCellProps = defaultPropGetter
+}) => {
   const defaultColumn = React.useMemo(
     () => ({
       width: 80
@@ -32,7 +42,19 @@ const Table = ({ columns, data, className }) => {
         {headerGroups.map((headerGroup, ind) => (
           <tr key={`headerGroup_${ind}`} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, ind) => (
-              <th key={`column_${ind}`} {...column.getHeaderProps()}>{column.render('Header')}</th>
+              <th
+                key={`column_${ind}`}
+                {...column.getHeaderProps([
+                  {
+                    className: column.className,
+                    style: column.style
+                  },
+                  getColumnProps(column),
+                  getHeaderProps(column)
+                ])}
+              >
+                {column.render('Header')}
+              </th>
             ))}
           </tr>
         ))}
@@ -44,7 +66,20 @@ const Table = ({ columns, data, className }) => {
             return (
               <tr key={`row_${ind}`} {...row.getRowProps()}>
                 {row.cells.map((cell, ind) => {
-                  return <td key={`cell_${ind}`} {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  return (
+                    <td
+                      key={`cell_${ind}`}
+                      {...cell.getCellProps([
+                        {
+                          className: cell.column.className,
+                          style: cell.column.style
+                        },
+                        getColumnProps(cell.column),
+                        getCellProps(cell)
+                      ])}
+                    >
+                      {cell.render('Cell')}
+                    </td>)
                 })}
               </tr>
             )
