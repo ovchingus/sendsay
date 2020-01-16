@@ -2,9 +2,8 @@ import React from 'react'
 import Layout from 'components/Layout'
 import Logo from 'components/Logo'
 import logo from 'assets/logo.svg'
-
 import MailSender from 'views/MailSender'
-import MailSendedTable from 'views/MailSendedTable'
+import MailSentTable from 'views/MailSentTable'
 
 import './style.css'
 
@@ -13,11 +12,11 @@ function App () {
     <Layout>
       <Logo src={logo} className='App-logo' />
       <MailSender className='App-MailSender' />
-      <div className='App-SendedTable'>
-        <div className='App-SendedTableTitle'>
+      <div className='App-SentTable'>
+        <div className='App-SentTableTitle'>
         Отправленные сообщения
         </div>
-        <MailSendedTable className='App-SendedTableData' />
+        <MailSentTable className='App-SentTableData' />
       </div>
     </Layout>
   )

@@ -6,21 +6,19 @@
   margin-top: 40px;
 }
 
-.App-SendedTable {
+.App-SentTable {
   margin: 50px auto;
   width: 740px;
-
-  font-family: SF Pro Text;
 }
 
-.App-SendedTableTitle {
+.App-SentTableTitle {
   font-size: 24px;
   line-height: 30px;
 
   color: #000000;
 }
 
-.App-SendedTableData {
+.App-SentTableData {
   margin-top: 10px;
   width: 740px;
 }
