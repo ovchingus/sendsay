@@ -9,9 +9,8 @@
 .Table > thead > tr > th {
   border-bottom: 1px solid #dddddd;
   text-align: left;
-  opacity: 0.4;
   font-weight: normal;
-  color: #000000;
+  color: #949494;
 
   height: 45px;
 }
