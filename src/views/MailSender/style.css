@@ -5,6 +5,7 @@
   border-radius: 5px;
   width: 800px;
   padding: 30px;
+  position: relative;
 }
 
 .MailSender-title {
@@ -67,4 +68,15 @@
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   margin-top: 7px;
+}
+
+.MailSender-dropzone {
+  position: absolute;
+  margin: 5px;
+  top: 0;
+  left: 0;
+  bottom: 0px;
+
+  height: 100%;
+  z-index: 2;
 }
