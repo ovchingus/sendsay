@@ -30,6 +30,5 @@
 .TextArea-field::placeholder {
   font-size: 18px;
   line-height: 25px;
-  color: #000000;
-  opacity: 0.4;
+  color: #949494;
 }
