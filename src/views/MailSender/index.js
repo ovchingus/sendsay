@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import Input from 'components/Forms/Input'
 import InputGroup from 'components/Forms/InputGroup'
 import TextArea from 'components/Forms/TextArea'
@@ -14,14 +14,26 @@ import './style.css'
 import Attachment from './Attachment'
 
 const MailSender = ({ className }) => {
-  const { ref, isComponentVisible } = useComponentVisible(true)
+  const [ref, isDropzoneVisible, setIsDropzoneVisible] = useComponentVisible(true)
+
+  const handleAttach = () => {
+    setIsDropzoneVisible(true)
+  }
+
+  const handleAttachedFiles = (files) => {
+    // add to store
+  }
 
   return (
     <>
       <div className={`MailSender ${className}`}>
-        {isComponentVisible &&
+        {isDropzoneVisible &&
           <div ref={ref}>
-            <Dropzone className='MailSender-dropzone' />
+            <Dropzone
+              maxFileSize={5000000}
+              handleFiles={handleAttachedFiles}
+              className='MailSender-dropzone'
+            />
           </div>}
 
         <div className='MailSender-title'>
@@ -56,14 +68,15 @@ const MailSender = ({ className }) => {
         />
 
         <div className='MailSender-attachmentContainer'>
-          <Attachment className='MailSender-attachment' />
-          <Attachment className='MailSender-attachment' />
-          <Attachment className='MailSender-attachment' />
+          {/* get from store */}
+          {/* {attachedFiles.map(file => (
+            <Attachment key={file.name} name={file.name} className='MailSender-attachment' />
+          ))} */}
         </div>
 
-        <Button textOnly className='MailSender-fileAttach'>
+        <Button textOnly onClick={(e) => handleAttach(e)} className='MailSender-fileAttach'>
           <SvgIcon src={paperclipIcon} alt='paperclip-icon' />
-        &nbsp;Прикрепить файл
+          &nbsp;Прикрепить файл
         </Button>
         <Button className='MailSender-sendButton'>
         Отправить
