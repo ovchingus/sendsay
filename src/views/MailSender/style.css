@@ -33,7 +33,6 @@
 
 .MailSender-messageTextAreaForm {
   margin-top: 20px;
-  width: 740px;
 }
 
 .MailSender-messageTextAreaField {
@@ -60,4 +59,13 @@
   height: 40px;
 
   margin-top: 20px;
+}
+
+.MailSender-attachmentContainer {
+  /* width: 365px; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-top: 7px;
 }

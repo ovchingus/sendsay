@@ -3,10 +3,12 @@ import Input from 'components/Forms/Input'
 import InputGroup from 'components/Forms/InputGroup'
 import TextArea from 'components/Forms/TextArea'
 import SvgIcon from 'components/SvgIcon'
-import paperclipIcon from 'assets/IconPaperclip.svg'
+import paperclipIcon from 'assets/IconPaperclipSM_Blue.svg'
 import Button from 'components/Button'
 
 import './style.css'
+
+import Attachment from '../Attachment'
 
 const MailSender = ({ className }) => {
   return (
@@ -41,6 +43,13 @@ const MailSender = ({ className }) => {
         fieldStyle='MailSender-messageTextAreaField'
         placeholder='Ваше письмо'
       />
+
+      <div className='MailSender-attachmentContainer'>
+        <Attachment className='MailSender-attachment' />
+        <Attachment className='MailSender-attachment' />
+        <Attachment className='MailSender-attachment' />
+      </div>
+
       <Button textOnly className='MailSender-fileAttach'>
         <SvgIcon src={paperclipIcon} alt='paperclip-icon' />
         &nbsp;Прикрепить файл

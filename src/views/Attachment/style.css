@@ -1,0 +1,40 @@
+.Attachment {
+  display: inline-block;
+
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 50px;
+
+  padding: 10px;
+}
+
+.Attachment-filename {
+  padding-left: 10px;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.Attachment-icon {
+  vertical-align: middle;
+}
+
+.Attachment-removeButton {
+  vertical-align: middle;
+  height: 20px;
+  color: #ff6666;
+  float: right;
+}
+
+.Attachment-removeButton:focus {
+  border: none;
+}
+
+.Attachment-removeButton:hover {
+  color: #ff666680;
+}
+
+.Attachment-removeButtonIcon {
+  padding-right: 6px;
+}
