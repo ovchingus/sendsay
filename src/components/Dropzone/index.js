@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import './style.css'
@@ -32,10 +32,9 @@ const rejectStyle = {
   borderColor: '#ff1744'
 }
 
-function Dropzone ({ className, handleFiles, maxFileSize, maxFilesSize }) {
+function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
   const {
     acceptedFiles,
-    rejectedFiles,
     getRootProps,
     getInputProps,
     isDragActive,
@@ -55,9 +54,9 @@ function Dropzone ({ className, handleFiles, maxFileSize, maxFilesSize }) {
     ...(isDragReject ? rejectStyle : {})
   }), [isDragAccept, isDragActive, isDragReject])
 
-  if (handleFiles) {
-    handleFiles(acceptedFiles)
-  }
+  useEffect(() => {
+    handleAccept(acceptedFiles)
+  }, [acceptedFiles, handleAccept])
 
   return (
     <div className={`Dropzone ${className}`}>
