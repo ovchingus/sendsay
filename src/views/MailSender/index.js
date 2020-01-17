@@ -9,17 +9,40 @@ import Button from 'components/Button'
 import Dropzone from 'components/Dropzone'
 import { useComponentVisible } from 'utils'
 import { fileAttach, fileDetach } from 'flux/actions'
+import { Field, Form, ErrorMessage, withFormik } from 'formik'
+import * as Yup from 'yup'
 
 import './style.css'
 
 import Attachment from './Attachment'
+
+const validationSchema = Yup.object().shape({
+  fromName: Yup.string()
+    .min(2, 'Имя очень подозрительно')
+    .required('Ваше имя не может не быть'),
+  fromEmail: Yup.string()
+    .email('Email должен быть корректным')
+    .required('Email не может быть пустым'),
+  toName: Yup.string()
+    .min(2, 'Имя очень подозрительно')
+    .required('Имя получателя не может не быть'),
+  toEmail: Yup.string()
+    .email('Email должен быть корректным')
+    .required('Email не может быть пустым'),
+  subject: Yup.string().required('Тема не может быть пустой'),
+  message: Yup.string().required('Email не может быть пустым')
+})
 
 const MailSender = ({
   className,
   attachments,
   handleFileAttachAccept,
   handleFileDetach,
-  adw
+  values,
+  touched,
+  errors,
+  handleSubmit,
+  handleBlur
 }) => {
   const [ref, isDropzoneVisible, setIsDropzoneVisible] = useComponentVisible(
     false
@@ -30,7 +53,7 @@ const MailSender = ({
   }
 
   return (
-    <div className={`MailSender ${className}`}>
+    <Form onSubmit={handleSubmit} className={`MailSender ${className}`}>
       {isDropzoneVisible && (
         <div ref={ref}>
           <Dropzone
@@ -43,27 +66,59 @@ const MailSender = ({
 
       <div className='MailSender-title'>Отправлялка сообщений</div>
       <InputGroup className='MailSender-inputGroup'>
-        <Input
+        <Field
+          as={Input}
+          type='text'
+          name='fromName'
           label='От кого'
           placeholder='Имя'
-          className='MailSender-inputGroupInput'
+          className='MailSender-input'
         />
-        <Input placeholder='Email' className='MailSender-inputGroupInput' />
+
+        <Field
+          as={Input}
+          type='email'
+          name='fromEmail'
+          placeholder='Email'
+          className='MailSender-input'
+        />
+
       </InputGroup>
-      <InputGroup className='MailSender-inputGroup'>
-        <Input
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='fromName' />
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='fromEmail' />
+
+      <InputGroup onSubmit={handleSubmit} className='MailSender-inputGroup'>
+        <Field
+          as={Input}
+          type='text'
+          name='toName'
           label='Кому'
           placeholder='Имя'
-          className='MailSender-inputGroupInput'
+          className='MailSender-input'
         />
-        <Input placeholder='Email' className='MailSender-inputGroupInput' />
+        <Field
+          as={Input}
+          type='email'
+          name='toEmail'
+          placeholder='Email'
+          className='MailSender-input'
+        />
       </InputGroup>
-      <Input
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='toName' />
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='toEmail' />
+
+      <Field
+        as={Input}
+        type='text'
+        name='subject'
         label='Тема письма'
         placeholder='Тема'
         className='MailSender-topicInput'
       />
-      <TextArea
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='subject' />
+      <Field
+        as={TextArea}
+        name='message'
         label='Сообщение'
         className='MailSender-messageTextAreaForm'
         fieldStyle='MailSender-messageTextAreaField'
@@ -83,20 +138,42 @@ const MailSender = ({
 
       <Button
         textOnly
-        onClick={() => handleAttachButtonClick()}
+        type='button'
+        onClick={handleAttachButtonClick}
         className='MailSender-fileAttach'
       >
         <SvgIcon src={paperclipIcon} alt='paperclip-icon' />
-          &nbsp;Прикрепить файл
+        &nbsp;Прикрепить файл
       </Button>
 
-      <Button className='MailSender-sendButton'>Отправить</Button>
-    </div>
+      <Button type='submit' className='MailSender-sendButton'>
+        Отправить
+      </Button>
+    </Form>
   )
 }
 
+const formikEnhancer = withFormik({
+  validationSchema: validationSchema,
+  mapPropsToValues: () => ({
+    fromName: '',
+    fromEmail: '',
+    toName: '',
+    toEmail: '',
+    subject: '',
+    attachments: {}
+  }),
+  handleSubmit: (values, { setSubmitting }) => {
+    setTimeout(() => {
+      console.log(values)
+      setSubmitting(false)
+    }, 1000)
+  },
+  displayName: 'MailSender'
+})(MailSender)
+
 const mapStateToProps = state => ({
-  attachments: state.attachments
+  attachments: state.current.attachments
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -108,4 +185,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MailSender)
+export default connect(mapStateToProps, mapDispatchToProps)(formikEnhancer)
