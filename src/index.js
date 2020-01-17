@@ -3,19 +3,20 @@ import ReactDOM from 'react-dom'
 import Layout from 'components/Layout'
 import Logo from 'components/Logo'
 import logo from 'assets/logo.svg'
-import MailSender from 'views/MailSender'
-import MailSentTable from 'views/MailSentTable'
+import MailSender from 'modules/MailSender'
+import MailSentTable from 'modules/MailSentTable'
 import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import 'normalize.css'
 
-import { current } from 'flux/reducers'
+import { current, sent } from 'flux/reducers'
 import './index.css'
 import './style.css'
 
 const reducer = combineReducers({
-  current
+  current,
+  sent
 })
 
 const store = createStore(
@@ -29,12 +30,7 @@ function App () {
       <Layout>
         <Logo src={logo} className='App-logo' />
         <MailSender className='App-MailSender' />
-        <div className='App-SentTable'>
-          <div className='App-SentTableTitle'>
-            Отправленные сообщения
-          </div>
-          <MailSentTable className='App-SentTableData' />
-        </div>
+        <MailSentTable className='App-SentTable' />
       </Layout>
     </Provider>
   )

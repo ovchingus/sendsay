@@ -5,20 +5,3 @@
 .App-logo {
   margin-top: 40px;
 }
-
-.App-SentTable {
-  margin: 50px auto;
-  width: 740px;
-}
-
-.App-SentTableTitle {
-  font-size: 24px;
-  line-height: 30px;
-
-  color: #000000;
-}
-
-.App-SentTableData {
-  margin-top: 10px;
-  width: 740px;
-}
