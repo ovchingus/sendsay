@@ -42,6 +42,8 @@ const MailSender = ({
   touched,
   errors,
   handleSubmit,
+  setFieldValue,
+  setFieldTouched,
   handleBlur
 }) => {
   const [ref, isDropzoneVisible, setIsDropzoneVisible] = useComponentVisible(
@@ -126,14 +128,21 @@ const MailSender = ({
       />
 
       <div className='MailSender-attachmentContainer'>
-        {attachments.map(file => (
-          <Attachment
-            onRemove={() => handleFileDetach(file)}
-            key={file.name}
-            name={file.name}
-            className='MailSender-attachment'
-          />
-        ))}
+        {attachments.map((file, ind) => {
+          // const onChangeAttachment = () => {
+          //   setFieldValue('attachments', [...attachments])
+          // }
+          return (
+            <Field
+              as={Attachment}
+              // onChange={onChangeAttachment}
+              onRemove={() => { handleFileDetach(file) }}
+              key={`file_${ind}`}
+              name={file.name}
+              className='MailSender-attachment'
+            />
+          )
+        })}
       </div>
 
       <Button
@@ -161,12 +170,11 @@ const formikEnhancer = withFormik({
     toName: '',
     toEmail: '',
     subject: '',
-    attachments: {}
+    attachments: []
   }),
-  handleSubmit: (values, { setSubmitting }) => {
+  handleSubmit: (values, formikBag) => {
     setTimeout(() => {
-      console.log(values)
-      setSubmitting(false)
+      
     }, 1000)
   },
   displayName: 'MailSender'
