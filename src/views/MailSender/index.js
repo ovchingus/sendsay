@@ -1,3 +1,4 @@
+/* global atob */
 import React from 'react'
 import { connect } from 'react-redux'
 import Input from 'components/Forms/Input'
@@ -8,7 +9,7 @@ import paperclipIcon from 'assets/IconPaperclipSM_Blue.svg'
 import Button from 'components/Button'
 import Dropzone from 'components/Dropzone'
 import { useComponentVisible } from 'utils'
-import { fileAttach, fileDetach } from 'flux/actions'
+import { fileAttach, fileDetach, sendEmail } from 'flux/actions'
 import { Field, Form, ErrorMessage, withFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -38,6 +39,7 @@ const MailSender = ({
   attachments,
   handleFileAttachAccept,
   handleFileDetach,
+  handleEmailSend,
   values,
   touched,
   errors,
@@ -126,15 +128,17 @@ const MailSender = ({
         fieldStyle='MailSender-messageTextAreaField'
         placeholder='Ваше письмо'
       />
+      <ErrorMessage component='div' className='MailSender-inputMessage' name='message' />
 
       <div className='MailSender-attachmentContainer'>
         {attachments.map((file, ind) => {
+          // TODO: Попробовать доделать возможность файлы через формик value прокидывать
           // const onChangeAttachment = () => {
           //   setFieldValue('attachments', [...attachments])
           // }
           return (
-            <Field
-              as={Attachment}
+            <Attachment
+              // as={Attachment}
               // onChange={onChangeAttachment}
               onRemove={() => { handleFileDetach(file) }}
               key={`file_${ind}`}
@@ -170,12 +174,15 @@ const formikEnhancer = withFormik({
     toName: '',
     toEmail: '',
     subject: '',
+    message: '',
     attachments: []
   }),
-  handleSubmit: (values, formikBag) => {
-    setTimeout(() => {
-      
-    }, 1000)
+  handleSubmit: (values, { props }) => {
+    const data = {
+      ...values,
+      attachments: props.attachments
+    }
+    props.handleEmailSend(data)
   },
   displayName: 'MailSender'
 })(MailSender)
@@ -190,6 +197,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleFileDetach: file => {
     dispatch(fileDetach(file))
+  },
+  handleEmailSend: email => {
+    dispatch(sendEmail(email))
   }
 })
 
