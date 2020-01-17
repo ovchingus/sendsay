@@ -1,5 +1,5 @@
 /* global atob */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Input from 'components/Forms/Input'
 import InputGroup from 'components/Forms/InputGroup'
@@ -16,6 +16,9 @@ import * as Yup from 'yup'
 import './style.css'
 
 import Attachment from './Attachment'
+import SentBanner from './SentBanner'
+
+const sendBannerTimeout = 3000
 
 const validationSchema = Yup.object().shape({
   fromName: Yup.string()
@@ -46,20 +49,45 @@ const MailSender = ({
   handleSubmit,
   setFieldValue,
   setFieldTouched,
-  handleBlur
+  handleBlur,
+  status
 }) => {
-  const [ref, isDropzoneVisible, setIsDropzoneVisible] = useComponentVisible(
-    false
-  )
+  const [
+    refDropzone,
+    isDropzoneVisible,
+    setIsDropzoneVisible
+  ] = useComponentVisible(false)
 
   const handleAttachButtonClick = () => {
     setIsDropzoneVisible(true)
   }
 
-  return (
+  const [
+    refSentBanner,
+    isSentBannerVisible,
+    setIsSentBannerVisible
+  ] = useComponentVisible(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSentBannerVisible(false)
+    }, sendBannerTimeout)
+  }, [isSentBannerVisible, setIsSentBannerVisible])
+
+  useEffect(() => {
+    if (status && status.sent) {
+      setIsSentBannerVisible(true)
+    }
+  }, [setIsSentBannerVisible, status])
+
+  return isSentBannerVisible ? (
+    <div ref={refSentBanner}>
+      <SentBanner />
+    </div>
+  ) : (
     <Form onSubmit={handleSubmit} className={`MailSender ${className}`}>
       {isDropzoneVisible && (
-        <div ref={ref}>
+        <div ref={refDropzone}>
           <Dropzone
             maxFileSize={5000000}
             handleAccept={handleFileAttachAccept}
@@ -86,10 +114,17 @@ const MailSender = ({
           placeholder='Email'
           className='MailSender-input'
         />
-
       </InputGroup>
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='fromName' />
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='fromEmail' />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='fromName'
+      />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='fromEmail'
+      />
 
       <InputGroup onSubmit={handleSubmit} className='MailSender-inputGroup'>
         <Field
@@ -108,8 +143,16 @@ const MailSender = ({
           className='MailSender-input'
         />
       </InputGroup>
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='toName' />
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='toEmail' />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='toName'
+      />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='toEmail'
+      />
 
       <Field
         as={Input}
@@ -119,7 +162,11 @@ const MailSender = ({
         placeholder='Тема'
         className='MailSender-topicInput'
       />
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='subject' />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='subject'
+      />
       <Field
         as={TextArea}
         name='message'
@@ -128,7 +175,11 @@ const MailSender = ({
         fieldStyle='MailSender-messageTextAreaField'
         placeholder='Ваше письмо'
       />
-      <ErrorMessage component='div' className='MailSender-inputMessage' name='message' />
+      <ErrorMessage
+        component='div'
+        className='MailSender-inputMessage'
+        name='message'
+      />
 
       <div className='MailSender-attachmentContainer'>
         {attachments.map((file, ind) => {
@@ -140,7 +191,9 @@ const MailSender = ({
             <Attachment
               // as={Attachment}
               // onChange={onChangeAttachment}
-              onRemove={() => { handleFileDetach(file) }}
+              onRemove={() => {
+                handleFileDetach(file)
+              }}
               key={`file_${ind}`}
               name={file.name}
               className='MailSender-attachment'
@@ -177,12 +230,17 @@ const formikEnhancer = withFormik({
     message: '',
     attachments: []
   }),
-  handleSubmit: (values, { props }) => {
+  handleSubmit: (values, { setStatus, resetForm, props }) => {
     const data = {
       ...values,
       attachments: props.attachments
     }
     props.handleEmailSend(data)
+    setStatus({
+      sent: true
+    })
+    // reset fields
+    resetForm()
   },
   displayName: 'MailSender'
 })(MailSender)
