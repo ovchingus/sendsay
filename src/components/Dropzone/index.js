@@ -1,4 +1,5 @@
-import React, { useMemo, useEffect } from 'react'
+/* global FileReader btoa */
+import React, { useMemo, useEffect, useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import './style.css'
@@ -33,6 +34,28 @@ const rejectStyle = {
 }
 
 function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
+  const [files, setFiles] = useState([])
+
+  const onDrop = (acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader()
+
+      reader.onabort = () => console.log('file reading was aborted')
+      reader.onerror = () => console.log('file reading has failed')
+      reader.onload = async () => {
+        const binaryStr = reader.result
+        await setFiles([
+          ...files,
+          {
+            name: file.name,
+            base64: binaryStr
+          }]
+        )
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+
   const {
     acceptedFiles,
     getRootProps,
@@ -44,7 +67,8 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
     accept: 'image/jpg, image/png, image/gif, .doc, .docx, .xls, .xlsx, .pdf, .zip',
     maxSize: maxFileSize,
     multiple: true,
-    noClick: true
+    noClick: true,
+    onDrop
   })
 
   const style = useMemo(() => ({
@@ -55,8 +79,8 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
   }), [isDragAccept, isDragActive, isDragReject])
 
   useEffect(() => {
-    handleAccept(acceptedFiles)
-  }, [acceptedFiles, handleAccept])
+    handleAccept(files)
+  }, [files, handleAccept])
 
   return (
     <div className={`Dropzone ${className}`}>
