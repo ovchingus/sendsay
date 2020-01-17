@@ -1,0 +1,31 @@
+:root {
+    --SentBanner-width: 800px;
+}
+
+.SentBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 20px;
+
+  width: var(--SentBanner-width);
+  position: relative;
+
+  height: 320px;
+}
+
+.SentBanner-title {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.SentBanner-text {
+  font-size: 16px;
+  line-height: 25px;
+}
