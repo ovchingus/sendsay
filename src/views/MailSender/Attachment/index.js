@@ -9,7 +9,7 @@ import './style.css'
 
 const Attachment = ({ className, name, onRemove, onChange }) => {
   useEffect(() => {
-    onChange()
+    onChange && onChange()
   }, [])
   return (
     <div className={`Attachment ${className}`}>
