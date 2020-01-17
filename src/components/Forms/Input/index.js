@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.css'
 
-const Input = ({ name, label, placeholder, className, type }) => {
+const Input = ({ name, label, placeholder, className, type, ...props }) => {
   return (
     <form className={`Input ${className}`}>
       <div className='Input-label'>{label}</div>
@@ -11,6 +11,7 @@ const Input = ({ name, label, placeholder, className, type }) => {
         type={type}
         placeholder={placeholder}
         className='Input-field'
+        {...props}
       />
     </form>
   )
