@@ -1,5 +1,5 @@
-/* global FileReader btoa */
-import React, { useMemo, useEffect, useCallback, useState } from 'react'
+/* global FileReader */
+import React, { useMemo, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import './style.css'
@@ -57,7 +57,6 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
   }
 
   const {
-    acceptedFiles,
     getRootProps,
     getInputProps,
     isDragActive,
