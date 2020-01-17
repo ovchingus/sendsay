@@ -5,7 +5,7 @@ import './style.css'
 const Input = ({ name, label, placeholder, className, type, ...props }) => {
   return (
     <form className={`Input ${className}`}>
-      <div className='Input-label'>{label}</div>
+      <label htmlFor={name} className='Input-label'>{label}</label>
       <input
         name={name}
         type={type}
