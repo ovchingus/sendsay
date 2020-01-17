@@ -4,17 +4,30 @@ import {
   FILE_DETACH
 } from './actions'
 
-export function attachments (state = [], action) {
+const initialStateCurrent = {
+  attachments: []
+}
+
+export function current (state = initialStateCurrent, action) {
   switch (action.type) {
     case FILE_ATTACH:
-      return [...state, ...action.attachments]
+      return {
+        ...state,
+        attachments: [
+          ...state.attachments,
+          ...action.attachments
+        ]
+      }
     case FILE_DETACH:
-      return [
-        ...state.slice(0, state.indexOf(action.attachment)),
-        ...state.slice(state.indexOf(action.attachment) + 1)
-      ]
-    case RESET_ATTACHMENTS:
-      return []
+      return {
+        ...state,
+        attachments: [
+          ...state.attachments.slice(0, state.attachments.indexOf(action.attachment)),
+          ...state.attachments.slice(state.attachments.indexOf(action.attachment) + 1)
+        ]
+      }
+    // case RESET_ATTACHMENTS:
+    //   return []
     default:
       return state
   }

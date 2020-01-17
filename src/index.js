@@ -10,12 +10,12 @@ import { Provider } from 'react-redux'
 
 import 'normalize.css'
 
-import { attachments } from 'flux/reducers'
+import { current } from 'flux/reducers'
 import './index.css'
 import './style.css'
 
 const reducer = combineReducers({
-  attachments
+  current
 })
 
 const store = createStore(
