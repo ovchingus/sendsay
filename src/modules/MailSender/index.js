@@ -239,7 +239,6 @@ const formikEnhancer = withFormik({
     setStatus({
       sent: true
     })
-    // reset fields
     resetForm()
   },
   displayName: 'MailSender'

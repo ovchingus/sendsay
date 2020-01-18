@@ -1,6 +1,5 @@
 import {
   FILE_ATTACH,
-  RESET_ATTACHMENTS,
   FILE_DETACH,
   SEND_EMAIL
 } from './actions'
@@ -29,8 +28,11 @@ export function current (state = initialStateCurrent, action) {
           ...state.attachments.slice(state.attachments.indexOf(action.attachment) + 1)
         ]
       }
-    // case RESET_ATTACHMENTS:
-    //   return []
+    case SEND_EMAIL:
+      return {
+        ...state,
+        ...action.email
+      }
     default:
       return state
   }
