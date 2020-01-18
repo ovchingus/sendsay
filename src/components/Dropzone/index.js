@@ -39,6 +39,7 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
   const onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
+      reader.readAsDataURL(file)
 
       reader.onabort = () => console.log('file reading was aborted')
       reader.onerror = () => console.log('file reading has failed')
@@ -48,11 +49,10 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
           ...files,
           {
             name: file.name,
-            base64: binaryStr
+            data: binaryStr
           }]
         )
       }
-      reader.readAsDataURL(file)
     })
   }
 
