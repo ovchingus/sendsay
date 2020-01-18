@@ -1,7 +1,9 @@
 import {
   FILE_ATTACH,
   FILE_DETACH,
-  SEND_EMAIL
+  SENT_SUCCESS,
+  SENT_ERROR,
+  RESET_ATTACHMENTS
 } from './actions'
 
 import { getMonthName } from 'utils'
@@ -28,44 +30,26 @@ export function current (state = initialStateCurrent, action) {
           ...state.attachments.slice(state.attachments.indexOf(action.attachment) + 1)
         ]
       }
-    case SEND_EMAIL:
-      return {
-        ...state,
-        ...action.email
-      }
+    case RESET_ATTACHMENTS:
+      return initialStateCurrent
     default:
       return state
   }
 }
 
 export function sent (state = [], action) {
-  // const normalizedValues = {
-  //   letter: {
-  //     subject: action.subject,
-  //     'from.name': action.fromName,
-  //     'from.email': action.fromEmail,
-  //     'to.name': action.toName,
-  //     message: {
-  //       text: action.message
-  //     },
-  //     attaches: action.attachments
-  //   },
-  //   mca: [
-  //     action.toEmail
-  //   ]
-  // }
-
   const date = new Date()
   const normalizedDate = `${date.getDate()} ${getMonthName(date.getMonth())}`
 
   switch (action.type) {
-    case SEND_EMAIL:
+    case SENT_SUCCESS:
       return [
         ...state,
         {
           date: normalizedDate,
           theme: action.email.subject,
-          status: 'Ошибка'
+          status: 'Ошибка',
+          trackId: action.trackId['track.id']
         }
       ]
     default:
