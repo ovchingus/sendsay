@@ -5,8 +5,11 @@ import Logo from 'components/Logo'
 import logo from 'assets/logo.svg'
 import MailSender from 'modules/MailSender'
 import MailSentTable from 'modules/MailSentTable'
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
+import Sendsay from 'sendsay-api'
 
 import 'normalize.css'
 
@@ -14,15 +17,18 @@ import { current, sent } from 'flux/reducers'
 import './index.css'
 import './style.css'
 
+const sendsayApi = new Sendsay({ apiKey: process.env.REACT_APP_SENDSAY_API_KEY });
+
+console.log(process.env.REACT_APP_SENDSAY_API_KEY)
+
 const reducer = combineReducers({
   current,
   sent
 })
 
-const store = createStore(
-  reducer, /* preloadedState, */
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const store = createStore(reducer, composeWithDevTools(
+  applyMiddleware(thunk.withExtraArgument(sendsayApi))
+))
 
 function App () {
   return (
