@@ -10,7 +10,7 @@ import './style.css'
 const Attachment = ({ className, name, onRemove, onChange }) => {
   useEffect(() => {
     onChange && onChange()
-  }, [])
+  })
   return (
     <div className={`Attachment ${className}`}>
       <SvgIcon className='Attachment-icon' src={IconPaperclipMD} alt='paperclip-icon' />
