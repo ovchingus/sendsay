@@ -1,4 +1,3 @@
-/* global atob */
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Input from 'components/Forms/Input'
@@ -183,7 +182,7 @@ const MailSender = ({
 
       <div className='MailSender-attachmentContainer'>
         {attachments.map((file, ind) => {
-          // TODO: Попробовать доделать возможность файлы через формик value прокидывать
+          // TODO: Сделать возможность файлы через формик value прокидывать
           // const onChangeAttachment = () => {
           //   setFieldValue('attachments', [...attachments])
           // }

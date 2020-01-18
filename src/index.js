@@ -19,8 +19,6 @@ import './style.css'
 
 const sendsayApi = new Sendsay({ apiKey: process.env.REACT_APP_SENDSAY_API_KEY });
 
-console.log(process.env.REACT_APP_SENDSAY_API_KEY)
-
 const reducer = combineReducers({
   current,
   sent
