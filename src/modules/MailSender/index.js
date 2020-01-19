@@ -41,14 +41,7 @@ const MailSender = ({
   attachments,
   handleFileAttachAccept,
   handleFileDetach,
-  handleEmailSend,
-  values,
-  touched,
-  errors,
   handleSubmit,
-  setFieldValue,
-  setFieldTouched,
-  handleBlur,
   status
 }) => {
   const [
@@ -125,7 +118,7 @@ const MailSender = ({
         name='fromEmail'
       />
 
-      <InputGroup onSubmit={handleSubmit} className='MailSender-inputGroup'>
+      <InputGroup className='MailSender-inputGroup'>
         <Field
           as={Input}
           type='text'
