@@ -46,7 +46,6 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
       reader.onload = async () => {
         const binaryStr = reader.result
         await setFiles([
-          ...files,
           {
             name: file.name,
             data: binaryStr
@@ -63,7 +62,7 @@ function Dropzone ({ className, handleAccept, maxFileSize, maxFilesSize }) {
     isDragAccept,
     isDragReject
   } = useDropzone({
-    accept: 'image/jpg, image/png, image/gif, .doc, .docx, .xls, .xlsx, .pdf, .zip',
+    accept: '.jpg, .png, .gif, .doc, .docx, .xls, .xlsx, .pdf, .zip',
     maxSize: maxFileSize,
     multiple: true,
     noClick: true,

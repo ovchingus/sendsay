@@ -9,31 +9,24 @@ import {
 
 import { getMonthName } from 'utils'
 
-const initialStateCurrent = {
-  attachments: []
-}
-
-export function current (state = initialStateCurrent, action) {
+export function attachments (state = [], action) {
   switch (action.type) {
     case FILE_ATTACH:
-      return {
+      return [
         ...state,
-        attachments: [...state.attachments, ...action.attachments]
-      }
+        ...action.attachments
+      ]
     case FILE_DETACH:
-      return {
-        ...state,
-        attachments: [
-          ...state.attachments.slice(0,
-            state.attachments.indexOf(action.attachment)
-          ),
-          ...state.attachments.slice(
-            state.attachments.indexOf(action.attachment) + 1
-          )
-        ]
-      }
+      return [
+        ...state.slice(0,
+          state.indexOf(action.attachment)
+        ),
+        ...state.slice(
+          state.indexOf(action.attachment) + 1
+        )
+      ]
     case RESET_ATTACHMENTS:
-      return initialStateCurrent
+      return []
     default:
       return state
   }
