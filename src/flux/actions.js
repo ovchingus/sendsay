@@ -4,7 +4,9 @@
 export const FILE_ATTACH = 'FILE_ATTACH'
 export const RESET_ATTACHMENTS = 'RESET_ATTACHMENTS'
 export const FILE_DETACH = 'FILE_DETACH'
+
 export const SEND_EMAIL = 'SEND_EMAIL'
+export const SEND_EMAIL_ERROR = 'SEND_EMAIL_ERROR'
 export const SENT_SUCCESS = 'SENT_SUCCESS'
 export const SENT_ERROR = 'SENT_ERROR'
 
@@ -25,16 +27,26 @@ export const fileDetach = (attachment) => ({
   attachment
 })
 
-export const sentSuccess = (email, trackId) => ({
-  type: SENT_SUCCESS,
+const _sendEmail = (email, trackId) => ({
+  type: SEND_EMAIL,
   email,
   trackId
 })
 
-export const sentError = (email, error) => ({
-  type: SENT_ERROR,
+const _sendEmailError = (email, error) => ({
+  type: SEND_EMAIL_ERROR,
   email,
   error
+})
+
+export const sentSuccess = (trackId) => ({
+  type: SENT_SUCCESS,
+  trackId
+})
+
+export const sentError = (trackId) => ({
+  type: SENT_ERROR,
+  trackId
 })
 
 /**
@@ -45,7 +57,8 @@ export const sendEmail = (email) => (dispatch) => {
   return dispatch(processEmail(email))
 }
 
-const processEmail = (email) => (dispatch, getState, sendsayApi) => {
+const processEmail = (email) => async (dispatch, getState, sendsayApi) => {
+  console.log(email)
   const normalizedRequest = {
     action: 'issue.send.test',
     letter: {
@@ -65,9 +78,33 @@ const processEmail = (email) => (dispatch, getState, sendsayApi) => {
       email.toEmail
     ]
   }
-  console.log(normalizedRequest)
-  return sendsayApi.request(normalizedRequest).then(
-    (trackId) => dispatch(sentSuccess(email, trackId)),
-    (error) => dispatch(sentError(email, error))
-  )
+
+  try {
+    const res = await sendsayApi.request(normalizedRequest)
+    const trackId = res['track.id']
+    await dispatch(_sendEmail(email, trackId))
+    dispatch(addStatusResolver(trackId))
+  } catch (error) {
+    dispatch(_sendEmailError(email, error))
+  }
+}
+
+const addStatusResolver = (trackId) => (dispatch, getState, sendsayApi) => {
+  const getCurrentStatus = async () => {
+    await setTimeout(async () => {
+      const res = await sendsayApi.request({
+        action: 'track.get',
+        id: trackId
+      })
+      const status = parseInt(res.obj.status)
+      if (status === -1) {
+        dispatch(sentSuccess(trackId))
+      } else if (status < -1) {
+        dispatch(sentError(trackId))
+      } else if (status > -1) {
+        getCurrentStatus()
+      }
+    }, 1000)
+  }
+  return getCurrentStatus()
 }
