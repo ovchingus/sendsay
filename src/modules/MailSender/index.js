@@ -237,7 +237,7 @@ const formikEnhancer = withFormik({
 })(MailSender)
 
 const mapStateToProps = state => ({
-  attachments: state.current.attachments
+  attachments: state.attachments
 })
 
 const mapDispatchToProps = dispatch => ({

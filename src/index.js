@@ -13,14 +13,14 @@ import Sendsay from 'sendsay-api'
 
 import 'normalize.css'
 
-import { current, sent } from 'flux/reducers'
+import { attachments, sent } from 'flux/reducers'
 import './index.css'
 import './style.css'
 
 const sendsayApi = new Sendsay({ apiKey: process.env.REACT_APP_SENDSAY_API_KEY })
 
 const reducer = combineReducers({
-  current,
+  attachments,
   sent
 })
 

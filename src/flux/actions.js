@@ -58,7 +58,6 @@ export const sendEmail = (email) => (dispatch) => {
 }
 
 const processEmail = (email) => async (dispatch, getState, sendsayApi) => {
-  console.log(email)
   const normalizedRequest = {
     action: 'issue.send.test',
     letter: {
