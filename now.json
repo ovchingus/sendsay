@@ -1,0 +1,8 @@
+{
+    "build": {
+        "env": {
+            "NODE_PATH": "src/",
+            "REACT_APP_SENDSAY_API_KEY":"18W37LBOuYbXmUVBVJptguaVj2OsY_0v580kZt3XNO8XButj9mLeP7dHTD6vloZnE3hheue0682UgQElDLx4eTQ"
+        }
+    }
+}
