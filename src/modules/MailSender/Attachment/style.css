@@ -1,0 +1,49 @@
+.Attachment {
+  display: flex;
+
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 50px;
+
+  padding: 10px;
+}
+
+.Attachment-filename {
+  display: inline-block;
+  padding-left: 10px;
+  font-size: 16px;
+  line-height: 30px;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Attachment-icon {
+  vertical-align: middle;
+}
+
+.Attachment-removeButton {
+  vertical-align: middle;
+  color: #ff6666;
+  float: right;
+  line-height: 20px;
+  font-size: 16px;
+  width: fit-content;
+  margin-left: auto;
+ 
+  height: 30px;
+}
+
+.Attachment-removeButton:focus {
+  border-color: #ff666680;
+}
+
+.Attachment-removeButton:hover {
+  color: #ff666680;
+}
+
+.Attachment-removeButtonIcon {
+  padding-right: 6px;
+}
